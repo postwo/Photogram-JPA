@@ -25,7 +25,7 @@ public class HttpController {
     }
 
     // delete = 데이터 삭제
-    @DeleteMapping("delete")
+    @DeleteMapping("/delete")
     public String Delete() {
         return "Delete 요청됨";
     }
