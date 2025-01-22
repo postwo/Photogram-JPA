@@ -45,3 +45,22 @@ create database photogram;
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 ```
+
+### 인텔리제이 devtools 적용방법
+
+2개 블로그 참고 
+https://mmee2.tistory.com/60
+
+https://velog.io/@dayoung_sarah/IntelliJ-%EC%97%90-Devtools-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0
+
+devtools:
+    livereload:
+        enabled: true
+    restart:
+        enabled: true
+thymeleaf:
+    cache: false
+
+devtools 이용시 템플릿 엔진의 캐싱 기능으로 인해 별도의 설정을 해주지 않으면, 그대로 캐싱 기능을 사용한다. 
+개발환경에서는 변경사항을 바로 반영해줘야 하기때문에 아래와 같이 캐싱 기능을 끈다.
+하지만 운영환경에서는 캐싱기능을 통해 성능 향상을 위해 다시 true로 설정해줘야 한다.
