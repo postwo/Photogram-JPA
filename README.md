@@ -59,7 +59,7 @@ devtools:
     restart:
         enabled: true
 thymeleaf:
-    cache: false
+    cache: false  //Thymeleaf 템플릿 파일을 수정했을 때, 서버를 재시작하지 않아도 변경 사항이 바로 반영
 
 devtools 이용시 템플릿 엔진의 캐싱 기능으로 인해 별도의 설정을 해주지 않으면, 그대로 캐싱 기능을 사용한다. 
 개발환경에서는 변경사항을 바로 반영해줘야 하기때문에 아래와 같이 캐싱 기능을 끈다.
