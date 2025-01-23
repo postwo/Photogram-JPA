@@ -23,6 +23,7 @@ public class User {
     private String username;
     private String password;
 
+    @Column(unique = true)
     private String name; //웹사이트
     private String website;
     private String bio; //자기소개
