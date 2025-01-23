@@ -1,5 +1,6 @@
 package com.example.photogram.domain.user;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +9,7 @@ import java.time.LocalDateTime;
 
 
 //JPA - java persistence API(자바로 데이터를 영구적으로 저장(DB)할 수 있는 api를 제공)
-
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
