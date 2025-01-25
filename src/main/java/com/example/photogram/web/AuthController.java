@@ -1,6 +1,7 @@
 package com.example.photogram.web;
 
 import com.example.photogram.domain.user.User;
+import com.example.photogram.handler.ex.CustomValidationException;
 import com.example.photogram.service.AuthService;
 import com.example.photogram.web.dto.auth.SignupDto;
 import lombok.RequiredArgsConstructor;
@@ -45,15 +46,19 @@ public class AuthController {
 
             for (FieldError error : bindingResult.getFieldErrors()){
                 errorMap.put(error.getField(),error.getDefaultMessage());
-                System.out.println(error.getDefaultMessage());
             }
+
+            throw new CustomValidationException("유효성 검사 실패함",errorMap); //errormap에는 bindingResult에 있는 모든에러가 모여있다.
+        }else {
+            //User <- SignupDto
+
+            User user = signupDto.toEntity();
+            User userENtity = authService.회원가입(user);
+            System.out.println(userENtity);
+            return "auth/signin"; // 회원가입 성공시 로그인 페이지로 이동
         }
 
-        //User <- SignupDto
-        User user = signupDto.toEntity();
-        User userENtity = authService.회원가입(user);
-        System.out.println(userENtity);
-        return "auth/signin"; // 회원가입 성공시 로그인 페이지로 이동
+
     }
 
 }
