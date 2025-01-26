@@ -112,3 +112,6 @@ userRepository.save(user) 실행 도중 데이터베이스 오류가 발생하�
 
 ### 콘솔 로그 크기 설정 방법
 https://observerlife.tistory.com/60
+
+
+### 로그인하고 회원가입할때는 귀중한 정보이기 때문에 주소창에 노출시키지 말아야한다. post로 하면 body 데이터들을 담아서 사용하기 때문에 안전하다 로그인만 예외적으로 post로 한다.
