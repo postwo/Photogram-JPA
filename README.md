@@ -115,3 +115,22 @@ https://observerlife.tistory.com/60
 
 
 ### 로그인하고 회원가입할때는 귀중한 정보이기 때문에 주소창에 노출시키지 말아야한다. post로 하면 body 데이터들을 담아서 사용하기 때문에 안전하다 로그인만 예외적으로 post로 한다.
+
+
+###
+	<!-- 시큐리티 태그 라이브러리 (jsp 있을때 사용) -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
+<sec:authorize access = "isAuthenticated()">
+    <sec:authentication property="principal" var="principal"/>
+</sec:authorize>
+
+이거를 headers 에 작성하면 이제 어디서든 principal(이거는 model에 담아서 보낸거다)에 접근이 가능하다  property="principal"이거는 공정값이다 변경x 
+이렇게 하면 이제 컨트롤러에서 model을 통해 principal을 보낼 필요없다
+principal == principalDetails이다
+principal.user.username 그러므로 호출할려면 이렇게 user에 있는 정보를 가져오듯이 이렇게 가지고 와야 한다.
+
+### 13차시 부터 들으면 된다
