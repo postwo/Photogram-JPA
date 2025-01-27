@@ -13,6 +13,7 @@ function update(userId) {
         dataType:"json" //응답 받을 형태
     }).done(res=>{
         console.log("update 성공");
+         location.href = "/user/" + userId; // 자기 원래 페이지로 이동
     }).fail(error=>{
         console.log("update 실패");
     });
