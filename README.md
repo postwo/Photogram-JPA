@@ -133,4 +133,8 @@ https://observerlife.tistory.com/60
 principal == principalDetails이다
 principal.user.username 그러므로 호출할려면 이렇게 user에 있는 정보를 가져오듯이 이렇게 가지고 와야 한다.
 
-### 13차시 부터 들으면 된다
+### 포토그램 github
+https://github.com/codingspecialist/EaszUp-Springboot-Photogram-End
+
+### 영속화 뜻
+영속화 = 데이터를 DB에 저장하고 관리하는 것
