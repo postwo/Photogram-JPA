@@ -15,7 +15,12 @@ function update(userId,event) {
         console.log("성공",res); //메시지를 보고싶으면 페이지이동을 안하면된다. 밑의 location.herf를 죽석처리 하고 테스트해보면된다.
          location.href = "/user/" + userId; // 자기 원래 페이지로 이동
     }).fail(error=>{ //HTTPStatus 상태코드 200번대가 아닐때
+        if(error.data == null){
+        alert(error.responseJSON.message);
+        }else{
         alert(JSON.stringify(error.responseJSON.data)); //JSON.stringify 는 object를 json문자열로 변경
+        }
+
 //        console.log("실패",error.responseJSON.data);
     });
 }

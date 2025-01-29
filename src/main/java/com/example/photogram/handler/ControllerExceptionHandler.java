@@ -38,6 +38,7 @@ public class ControllerExceptionHandler {
     //이거는 ajax통신이기 때문에 데이터로 응답
     @ExceptionHandler(CustomValidationApiException.class)
     public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
+        System.out.println("나실행중");
         return new ResponseEntity<CMRespDto<?>>(new CMRespDto<>(-1,e.getMessage(),e.getErrprMap()),HttpStatus.BAD_REQUEST);
     }
 
