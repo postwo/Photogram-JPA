@@ -1,7 +1,11 @@
 package com.example.photogram.handler;
 
+import com.example.photogram.handler.ex.CustomValidationApiException;
 import com.example.photogram.handler.ex.CustomValidationException;
 import com.example.photogram.util.Script;
+import com.example.photogram.web.dto.CMRespDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +33,12 @@ public class ControllerExceptionHandler {
         //2. Ajax 통신 - CMRespDto 좋음 = 개발자가 받음
         //3. Android 통신 - CMRespDto 좋음 = 개발자가 받음
         return Script.back(e.getErrprMap().toString());
+    }
+
+    //이거는 ajax통신이기 때문에 데이터로 응답
+    @ExceptionHandler(CustomValidationApiException.class)
+    public ResponseEntity<?> validationApiException(CustomValidationApiException e) {
+        return new ResponseEntity<CMRespDto<?>>(new CMRespDto<>(-1,e.getMessage(),e.getErrprMap()),HttpStatus.BAD_REQUEST);
     }
 
 }
