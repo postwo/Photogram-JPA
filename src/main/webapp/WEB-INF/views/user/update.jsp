@@ -22,12 +22,12 @@
 			<!--프로필셋팅 아이디영역end-->
 
 			<!--프로필 수정-->
-			<form id="profileUpdate"> <!--form 태그에는 put,delete 이런걸 못만든다 그러므로 자바스크립트 활용-->
+			<form id="profileUpdate"  onsubmit="update(${principal.user.id},event)"> <!-- event를 같이 날려줘야 한다. 안날려주면 페이지이동이 안된다.--> <!--form 태그에는 put,delete 이런걸 못만든다 그러므로 자바스크립트 활용-->
 				<div class="content-item__02">
 					<div class="item__title">이름</div>
 					<div class="item__input">
 						<input type="text" name="name" placeholder="이름"
-							value="${principal.user.name}" />
+							value="${principal.user.name}" required="required" />
 					</div>
 				</div>
 				<div class="content-item__03">
@@ -40,7 +40,7 @@
 				<div class="content-item__04">
 					<div class="item__title">패스워드</div>
 					<div class="item__input">
-						<input type="password" name="password" placeholder="패스워드"  />
+						<input type="password" name="password" placeholder="패스워드"  required="required" />
 					</div>
 				</div>
 				<div class="content-item__05">
@@ -88,7 +88,7 @@
 				<div class="content-item__11">
 					<div class="item__title"></div>
 					<div class="item__input">
-						<button type="button" onclick="update(${principal.user.id})">제출</button>
+						<button>제출</button> <!--이게 submit 버튼이 아니기 때문에 클릭하면 그냥 넘어간다. --> <!-- 버튼에 있는 설정을 지우면 form태그가 실행이된다.-->
 					</div>
 				</div>
 				<!--제출버튼end-->
