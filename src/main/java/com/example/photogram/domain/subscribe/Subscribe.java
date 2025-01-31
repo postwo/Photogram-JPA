@@ -41,7 +41,7 @@ public class Subscribe { //many
 
     private LocalDateTime createDate;
 
-    @PrePersist //데이터베이스 인서트되기 직전에 실행
+    @PrePersist //데이터베이스 인서트되기 직전에 실행 //이거는 jpa save등을 사용할때 적용 네이티브쿼리를 사용하면 적용이 안되단.
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
