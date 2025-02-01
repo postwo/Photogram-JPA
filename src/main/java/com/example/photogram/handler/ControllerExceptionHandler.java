@@ -1,5 +1,6 @@
 package com.example.photogram.handler;
 
+import com.example.photogram.handler.ex.CustomApiException;
 import com.example.photogram.handler.ex.CustomValidationApiException;
 import com.example.photogram.handler.ex.CustomValidationException;
 import com.example.photogram.util.Script;
@@ -42,4 +43,10 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<CMRespDto<?>>(new CMRespDto<>(-1,e.getMessage(),e.getErrprMap()),HttpStatus.BAD_REQUEST);
     }
 
+    //이거는 ajax통신이기 때문에 데이터로 응답
+    @ExceptionHandler(CustomApiException.class)
+    public ResponseEntity<?> apiException(CustomApiException e) {
+        System.out.println("나실행중");
+        return new ResponseEntity<CMRespDto<?>>(new CMRespDto<>(-1,e.getMessage(),null),HttpStatus.BAD_REQUEST);
+    }
 }

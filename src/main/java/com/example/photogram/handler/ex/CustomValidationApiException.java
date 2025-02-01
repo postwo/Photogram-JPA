@@ -15,6 +15,7 @@ public class CustomValidationApiException extends RuntimeException {
     }
 
 
+
     //생성자
     public CustomValidationApiException(String message, Map<String,String> errorMap) {
         super(message); // message는 getter를 만들필요없이 부모한테 던지면 된다. = 부모 클래스인 RuntimeException에 이미 message를 처리하는 필드와 getMessage() 메서드가 있기 때문에
