@@ -31,6 +31,23 @@
 </dependency>
 ```
 
+### yml
+
+servlet:
+multipart: //multipart 타입으로 사진을 받는다는 의미이다
+enabled: true //사진을 받겠다는 의미다 true
+max-file-size: 2MB //너무 크사진은 안받기위해 2mb로 제한
+
+file:
+path: C:/workspace/springbootwork/upload/
+upload뒤에 /가 안붙으면 파일명이 upload에 붙어서 나온다 그러므로 /를 붙여둔다.
+
+### upload jsp
+일반 application/x-www-form-urlencoded와 차이점
+타입	                                 데이터 포맷	                파일 업로드 가능 여부
+application/x-www-form-urlencoded	 key=value&key2=value2	   ❌ (텍스트 데이터만 가능)
+multipart/form-data 	             바이너리 데이터 포함	       ✅ (파일 업로드 가능)****
+
 ### 데이터베이스
 
 ```sql
