@@ -33,8 +33,14 @@ public class ControllerExceptionHandler {
         //1. 클라이언트에게 응답할때는 Script 좋음 = 이거는 클라이언트가 받음(브라우저)
         //2. Ajax 통신 - CMRespDto 좋음 = 개발자가 받음
         //3. Android 통신 - CMRespDto 좋음 = 개발자가 받음
-        return Script.back(e.getErrprMap().toString());
+       if (e.getErrprMap() == null){
+           return Script.back(e.getMessage());
+       }else{
+           return Script.back(e.getErrprMap().toString());
+       }
     }
+
+
 
     //이거는 ajax통신이기 때문에 데이터로 응답
     @ExceptionHandler(CustomValidationApiException.class)
