@@ -26,6 +26,12 @@ public class Image {
     private String postImageUrl;// 사진을 전송받ㅇ아서 그 사진을 서버에 특정 폴더에 저장 - DB에 그 저장된 경롤 insert = 사진을 db에 저잔안하고 서버(= 내컴퓨터)에 저장
 
 
+    /* JPA는 User 엔티티의 **기본 키(PK)**가 id라는 것을 자동으로 인식합니다.
+       따라서 @JoinColumn(name = "userId")을 선언하면,
+       userId라는 컬럼을 Image 테이블에서 외래 키(FK)로 생성하고,
+       User 엔티티의 id 값을 이 FK로 저장하게 됩니다.
+       즉, "userId 컬럼을 만들라"는 것은 JPA에게 "User 엔티티의 PK(id)를 FK로 사용하라"는 의미가 됩니다.
+       따라서 User 엔티티의 id 값이 자동으로 저장 */
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user; //누가 업로드 했는지 (유저정보) //오브젝트 자체는 db에 저장을 할수 없기 때문에 fk로 저장된다
