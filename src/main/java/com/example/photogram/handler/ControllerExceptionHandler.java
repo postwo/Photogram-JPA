@@ -1,6 +1,7 @@
 package com.example.photogram.handler;
 
 import com.example.photogram.handler.ex.CustomApiException;
+import com.example.photogram.handler.ex.CustomException;
 import com.example.photogram.handler.ex.CustomValidationApiException;
 import com.example.photogram.handler.ex.CustomValidationException;
 import com.example.photogram.util.Script;
@@ -40,6 +41,10 @@ public class ControllerExceptionHandler {
        }
     }
 
+    @ExceptionHandler(CustomException.class)
+    public String exception(CustomException e) {
+        return Script.back(e.getMessage());
+    }
 
 
     //이거는 ajax통신이기 때문에 데이터로 응답

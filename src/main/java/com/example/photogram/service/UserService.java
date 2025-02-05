@@ -2,6 +2,7 @@ package com.example.photogram.service;
 
 import com.example.photogram.domain.user.User;
 import com.example.photogram.domain.user.UserRepository;
+import com.example.photogram.handler.ex.CustomException;
 import com.example.photogram.handler.ex.CustomValidationApiException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,17 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+
+    public User 회원프로필 (int userId) {
+        //select * from image where userid = :userId; 이거는 네이티브 쿼리 방식
+        //findById 가 optional 타입이기 때문에 orElseThrow처리 회원을 못찾을수도 있기 떄문에 이렇게 처리
+        User userEntity = userRepository.findById(userId).orElseThrow(() -> {
+            throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
+        });
+        System.out.println("=================>");
+        userEntity.getImages().get(0); //모든이미지를 가지고 오는지 확인 하기 위해 작성
+        return userEntity;
+    }
 
     @Transactional
     public User 회원수정(int id, User user){

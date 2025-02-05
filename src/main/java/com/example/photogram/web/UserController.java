@@ -1,19 +1,28 @@
 package com.example.photogram.web;
 
 import com.example.photogram.config.auth.PrincipalDetails;
+import com.example.photogram.domain.user.User;
+import com.example.photogram.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 
+    private final UserService userService;
+
     //마이페이지 이동
-    @GetMapping("/user/{id}") //다른 사람페이지가 나올수도 있기 때문에 그걸 방지하기 위해 id를 붙였다
-    public String profile(@PathVariable int id) {
+    @GetMapping("/user/{id}") //다른 사람페이지가 나올수도 있기 때문에 그걸 방지하기 위해 id를 붙였다 //{id} 해당페이지 주인 아이디
+    public String profile(@PathVariable int id, Model model) {
+        User userEntity = userService.회원프로필(id);
+        model.addAttribute("user",userEntity);
         return "user/profile";
     }
 
