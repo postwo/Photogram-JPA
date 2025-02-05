@@ -68,7 +68,7 @@
 			 <c:forEach var="image" items="${user.images}">
                  <div class="img-box">
                      <a href="">
-                         <img src="/${image.postImageUrl}" />
+                         <img src="/upload/${image.postImageUrl}" /> <%--이렇게 앞에다 /upload 이걸 붙여주면 WebMvcConfig 가 동작을해서 C:/workspace/springbootwork/upload/ 이런형식으로 주소를 만들어준다 --%>
                      </a>
                      <div class="comment">
                          <a href="#" class="">
