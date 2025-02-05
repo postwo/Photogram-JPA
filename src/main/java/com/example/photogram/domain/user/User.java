@@ -41,10 +41,11 @@ public class User {
     //양방향 매핑 // 한명의 유저는 여러개의 이미지를 만들수 있다.
     //1.mappedBy(==나는 연관관계의 주인이 아니다 그러므로 테이블에 컬럼을 만들지마)에는 이미지 클래스에 있는 변수를 넣어줘야 한다
     //2. User를 select할 때 해당 user id(User 테이블에 있는 userid)로 등록된 image들을 다 가져와 == ex) 1번 사용자가 저장한 이미지를 다 조회해서 가져오라는 의미이다.
-    //3. 결론 = mappedBy 를 붙이면 나는 연관관계의 주인이 아니다 연관관계 주인은(지금 여기서 주인은 Image 이다) Image 테이브에 있는 user가 주인이다 그러므로 테이블에 컬럼을 만들지마
-    //Lazy = User를 Select할 때 해당 User id로 등록된 image들을 가져오지마 -> 대신 getImages() 메서드가 호출될때 가져와
+    //3. 결론 = mappedBy 를 붙이면 나는 연관관계의 주인이 아니다 연관관계 주인은(지금 여기서 주인은 Image 이다) Image 테이블에 있는 user가 주인이다 그러므로 테이블에 컬럼을 만들지마
+    //Lazy = User를 Select할 때 해당 User id로 등록된 image들을 가져오지마 -> 대신 getImages() 메서드의 image들이 호출될때 가져와
     //Eager = User를 Select할 때 해당 User id로 등록된 image들을 전부 Join해서 가져와
-    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY)
+    // 유저프로필(마이페이지) 갈때 유저정보도 가져가면서 이미지를 같이 가져올려면 양방향 매핑을 하면된다.
+    @OneToMany(mappedBy = "user",fetch = FetchType.LAZY) //양방향매핑
     private List<Image> images; //이미지 여러개  db는 하나의 컬럼에 하나의 데이터만 넣을수 있다 = 그러므로 이부분은 데이터베이스에 만들지 말라고 명시해줘야 한다
 
     private LocalDateTime createDate;
