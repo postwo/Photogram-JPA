@@ -22,8 +22,7 @@ public class UserService {
         User userEntity = userRepository.findById(userId).orElseThrow(() -> {
             throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
         });
-        System.out.println("=================>");
-        userEntity.getImages().get(0); //모든이미지를 가지고 오는지 확인 하기 위해 작성
+
         return userEntity;
     }
 
