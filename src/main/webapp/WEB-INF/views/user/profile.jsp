@@ -45,7 +45,7 @@
 			</div>
 			<div class="state">
 				<h4>${user.bio}</h4>
-                <h4>${user.website}</h4>
+				<h4>${user.website}</h4>
 			</div>
 		</div>
 		<!--유저정보 및 사진등록 구독하기-->
@@ -63,18 +63,21 @@
 			<div class="tab-1-content-inner">
 
 				<!--아이템들-->
+<%--EL표현식(==${})에서 변수명을 저긍면 get함수가 자동 호출된다. //user.images 에 이미지가 하나면 한번만 돈다--%>
 
+			 <c:forEach var="image" items="${user.images}">
+                 <div class="img-box">
+                     <a href="">
+                         <img src="/${image.postImageUrl}" />
+                     </a>
+                     <div class="comment">
+                         <a href="#" class="">
+                             <i class="fas fa-heart"></i><span>0</span>
+                         </a>
+                     </div>
+                 </div>
+             </c:forEach>
 
-				  <c:forEach var="image" items="${user.images}"> <!-- EL표현식(==${})에서 변수명을 저긍면 get함수가 자동 호출된다. //user.images 에 이미지가 하나면 한번만 돈다 -->
-                                	<div class="img-box">
-                                		<a href=""> <img src="${image.postImageUrl}" />
-                                		</a>
-                                		<div class="comment">
-                                		 <a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
-                                		 </a>
-                                	    </div>
-                                    </div>
-                   </c:forEach>
 
 				<!--아이템들end-->
 			</div>
