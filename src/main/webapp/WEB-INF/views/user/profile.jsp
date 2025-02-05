@@ -26,7 +26,7 @@
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>TherePrograming</h2>
+				<h2>${user.name}</h2>
 
 				<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
 				<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>
@@ -44,8 +44,8 @@
 				</ul>
 			</div>
 			<div class="state">
-				<h4>자기 소개입니다.</h4>
-				<h4>https://github.com/codingspecialist</h4>
+				<h4>${user.bio}</h4>
+                <h4>${user.website}</h4>
 			</div>
 		</div>
 		<!--유저정보 및 사진등록 구독하기-->
@@ -65,32 +65,16 @@
 				<!--아이템들-->
 
 
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
-						</a>
-					</div>
-				</div>
-
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
-						</a>
-					</div>
-				</div>
-
-				<div class="img-box">
-					<a href=""> <img src="/images/home.jpg" />
-					</a>
-					<div class="comment">
-						<a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
-						</a>
-					</div>
-				</div>
+				  <c:forEach var="image" items="${user.images}"> <!-- EL표현식(==${})에서 변수명을 저긍면 get함수가 자동 호출된다. //user.images 에 이미지가 하나면 한번만 돈다 -->
+                                	<div class="img-box">
+                                		<a href=""> <img src="${image.postImageUrl}" />
+                                		</a>
+                                		<div class="comment">
+                                		 <a href="#" class=""> <i class="fas fa-heart"></i><span>0</span>
+                                		 </a>
+                                	    </div>
+                                    </div>
+                   </c:forEach>
 
 				<!--아이템들end-->
 			</div>
