@@ -1,6 +1,7 @@
 package com.example.photogram.web;
 
 import com.example.photogram.config.auth.PrincipalDetails;
+import com.example.photogram.handler.ex.CustomValidationException;
 import com.example.photogram.service.ImageService;
 import com.example.photogram.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
@@ -33,9 +34,14 @@ public class ImageController {
         return "image/upload";
     }
 
-    //
+    //이미지 업로드
     @PostMapping("/image")
     public String imageUpload(ImageUploadDto imageUploadDto, @AuthenticationPrincipal PrincipalDetails principalDetails){ //이미지를 업로드 하기위해서 로그인한 유저정보가 필요하다
+
+        if (imageUploadDto.getFile().isEmpty()){
+            throw new CustomValidationException("이미지가 첨부 되지 않았습니다.",null);
+        }
+
         // 서비스 호출
         imageService.사진업로드(imageUploadDto,principalDetails);
 

@@ -1,6 +1,8 @@
 package com.example.photogram.service;
 
 import com.example.photogram.config.auth.PrincipalDetails;
+import com.example.photogram.domain.image.Image;
+import com.example.photogram.domain.image.ImageRepository;
 import com.example.photogram.web.dto.image.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,6 +20,7 @@ public class ImageService {
 
     @Value("${file.path}") //yml 에 있는 파일경로를 받아온다.
     private String uploadFolder;
+    private final ImageRepository imageRepository;
 
     //사진업로드
     @Transactional
@@ -34,6 +37,10 @@ public class ImageService {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        // image 테이블에 저장
+        Image image = imageUploadDto.toEntity(imageFileName,principalDetails.getUser()); // db에는 이미지 파일네임을 넣을거다
+        Image imageEntity = imageRepository.save(image);
 
     }
 }
