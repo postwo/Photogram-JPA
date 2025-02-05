@@ -241,3 +241,7 @@ id   구독하는유저   구독받는유저
 
 
 --user--
+
+### lazy,eager 전략
+//Lazy = User를 Select할 때 해당 User id로 등록된 image들을 가져오지마 -> ex) 대신 getImages() 메서드가 호출될때 가져와
+//Eager = User를 Select할 때 해당 User id로 등록된 image들을 전부 Join해서 가져와
