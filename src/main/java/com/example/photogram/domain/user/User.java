@@ -45,6 +45,7 @@ public class User {
     //Lazy = User를 Select할 때 해당 User id로 등록된 image들을 가져오지마 -> 대신 getImages() 메서드의 image들이 호출될때 가져와
     //Eager = User를 Select할 때 해당 User id로 등록된 image들을 전부 Join해서 가져와
     // 유저프로필(마이페이지) 갈때 유저정보도 가져가면서 이미지를 같이 가져올려면 양방향 매핑을 하면된다.
+    // 이렇게 양방향으로 하는이유는 프로필(=마이페이지)에서 User 정보를 통해서 이미지 정보도 가지고 오기 위해서다
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY) //양방향매핑
     private List<Image> images; //이미지 여러개  db는 하나의 컬럼에 하나의 데이터만 넣을수 있다 = 그러므로 이부분은 데이터베이스에 만들지 말라고 명시해줘야 한다
 
