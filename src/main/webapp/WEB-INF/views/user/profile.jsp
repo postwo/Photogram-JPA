@@ -26,10 +26,10 @@
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>${user.name}</h2>
+				<h2>${dto.user.name}</h2>
 
                 <c:choose>
-                    <c:when test="${principal.user.id == user.id}"> <%-- principal이 principaldetails이다  principal.user.id == user.id 자신의 아이디값하고 같으면 사진등록--%>
+                    <c:when test="${dto.pageOwnerState}">
                         <button class="cta" onclick="location.href='/image/upload'">사진등록</button>
                     </c:when>
                     <c:otherwise>
@@ -45,15 +45,15 @@
 
 			<div class="subscribe">
 				<ul>
-					<li><a href=""> 게시물<span>${user.images.size()}</span>
+					<li><a href=""> 게시물<span>${dto.imageCount}</span>
 					</a></li>
 					<li><a href="javascript:subscribeInfoModalOpen();"> 구독정보<span>2</span>
 					</a></li>
 				</ul>
 			</div>
 			<div class="state">
-				<h4>${user.bio}</h4>
-				<h4>${user.website}</h4>
+				<h4>${dto.user.bio}</h4>
+				<h4>${dto.user.website}</h4>
 			</div>
 		</div>
 		<!--유저정보 및 사진등록 구독하기-->
@@ -73,7 +73,7 @@
 				<!--아이템들-->
 <%--EL표현식(==${})에서 변수명을 저긍면 get함수가 자동 호출된다. //user.images 에 이미지가 하나면 한번만 돈다--%>
 
-			 <c:forEach var="image" items="${user.images}">
+			 <c:forEach var="image" items="${dto.user.images}">
                  <div class="img-box">
                      <a href="">
                          <img src="/upload/${image.postImageUrl}" /> <%--이렇게 앞에다 /upload 이걸 붙여주면 WebMvcConfig 가 동작을해서 C:/workspace/springbootwork/upload/ 이런형식으로 주소를 만들어준다 --%>

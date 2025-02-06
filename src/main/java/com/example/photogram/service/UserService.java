@@ -4,6 +4,7 @@ import com.example.photogram.domain.user.User;
 import com.example.photogram.domain.user.UserRepository;
 import com.example.photogram.handler.ex.CustomException;
 import com.example.photogram.handler.ex.CustomValidationApiException;
+import com.example.photogram.web.dto.user.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,14 +18,22 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true) //읽기전용 = 데이터변경감지를 안한다
-    public User 회원프로필 (int userId) {
+    public UserProfileDto 회원프로필 (int pageUserId, int principalid) { //pageUserId == 현재페이지 아이디 //rincipalid== 로그인한 사용자아이디
+
+        UserProfileDto dto = new UserProfileDto();
+
         //select * from image where userid = :userId; 이거는 네이티브 쿼리 방식
         //findById 가 optional 타입이기 때문에 orElseThrow처리 회원을 못찾을수도 있기 떄문에 이렇게 처리
-        User userEntity = userRepository.findById(userId).orElseThrow(() -> {
+        User userEntity = userRepository.findById(pageUserId).orElseThrow(() -> { //pageUserId == 현재페이지 아이디
             throw new CustomException("해당 프로필 페이지는 없는 페이지입니다.");
         });
 
-        return userEntity;
+        dto.setUser(userEntity);
+//        dto.setPageOwner(pageUserId == principalid ? 1: -1); // 1은 페이지 주인,-1은 주인이 아님 이거는 int여서 삼항연사자사용
+        dto.setPageOwnerState(pageUserId == principalid); //boolean 방식
+        dto.setImageCount(userEntity.getImages().size()); // 이미지 갯수
+
+        return dto;
     }
 
     @Transactional
