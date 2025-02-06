@@ -4,9 +4,7 @@ import com.example.photogram.config.auth.PrincipalDetails;
 import com.example.photogram.domain.user.User;
 import com.example.photogram.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,12 +28,12 @@ public class UserController {
     @GetMapping("/user/{id}/update") //유저 1번을 업데이트 하겠다 이런형식으로 가기 위해 id 사용
     public String update(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails){ //principalDetails 이게 세션 정보이다,
         //1. 추천
-        System.out.println("세션정보: "+ principalDetails.getUser());
+//        System.out.println("세션정보: "+ principalDetails.getUser());
 
         //2, 극혐
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
-        System.out.println("직접 찾은 세션 정보:"+mPrincipalDetails.getUser());
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        PrincipalDetails mPrincipalDetails = (PrincipalDetails) auth.getPrincipal();
+//        System.out.println("직접 찾은 세션 정보:"+mPrincipalDetails.getUser());
 
         return "user/update";
     }
