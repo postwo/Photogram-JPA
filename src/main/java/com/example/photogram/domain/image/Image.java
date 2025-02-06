@@ -45,4 +45,14 @@ public class Image {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", caption='" + caption + '\'' +
+                ", postImageUrl='" + postImageUrl + '\''        //+ ", user=" + user  //여기서 user를 출력 할떄 무한참조가 발생 그러므로 주석 처리하거나 지워버리면 에러발생이 안한다
+                + ", createDate=" + createDate +
+                '}';
+    }
 }

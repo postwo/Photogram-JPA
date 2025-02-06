@@ -42,5 +42,6 @@ public class ImageService {
         Image image = imageUploadDto.toEntity(imageFileName,principalDetails.getUser()); // db에는 이미지 파일네임을 넣을거다
         Image imageEntity = imageRepository.save(image);
 
+        System.out.println(imageEntity); //이게 있으면 무한 참조 에러가 발생한다
     }
 }
