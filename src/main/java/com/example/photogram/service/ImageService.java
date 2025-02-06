@@ -40,8 +40,8 @@ public class ImageService {
 
         // image 테이블에 저장
         Image image = imageUploadDto.toEntity(imageFileName,principalDetails.getUser()); // db에는 이미지 파일네임을 넣을거다
-        Image imageEntity = imageRepository.save(image);
+        imageRepository.save(image);
 
-        System.out.println(imageEntity); //이게 있으면 무한 참조 에러가 발생한다
+//        System.out.println(imageEntity); //이게 있으면 무한 참조 에러가 발생한다
     }
 }
