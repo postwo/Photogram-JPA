@@ -46,7 +46,8 @@ public class Image {
         this.createDate = LocalDateTime.now();
     }
 
-    // sout 처리할때 테스트 해보기 위해 오버라이딩함 지금은 필요없음 
+    // sout 처리할때 테스트 해보기 위해 오버라이딩함 지금은 필요없음
+    // 오브젝트를 콘솔에 출력할 때 문제가 될수 있어서 user 부분을 출력되지 않게 함 
 //    @Override
 //    public String toString() {
 //        return "Image{" +
