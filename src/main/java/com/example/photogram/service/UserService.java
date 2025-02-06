@@ -16,6 +16,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
+    @Transactional(readOnly = true) //읽기전용 = 데이터변경감지를 안한다
     public User 회원프로필 (int userId) {
         //select * from image where userid = :userId; 이거는 네이티브 쿼리 방식
         //findById 가 optional 타입이기 때문에 orElseThrow처리 회원을 못찾을수도 있기 떄문에 이렇게 처리

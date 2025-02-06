@@ -23,7 +23,7 @@ public class ImageService {
     private final ImageRepository imageRepository;
 
     //사진업로드
-    @Transactional
+    @Transactional // 서비스에서 변형(update,insert,delete )을 줄때는 Transactional을 꼭 걸어줘야 한다. 그이유는 둘중에 하나 실패를 하는 경우가 발생하기 때문에 이부분을 걸어서 rollback시켜줌으로 불상사를 방지할수 있다
     public void 사진업로드(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails) {
         UUID uuid = UUID.randomUUID(); // uuid 생성 = 네트워크 상에서 고유성이 보장되는 id를 만들기 위한 표준 규약 //유일성(중복이없다)이 있다(하지만 몇억분의 잃에 확률로 안되는 경우도 있다)
         String imageFileName = uuid+"_"+imageUploadDto.getFile().getOriginalFilename(); // 실제 파일네임이 들어온다 // 1.jpg 이런형식으로 //이렇게 파일명하고 uuid를 합치면 유일성이 꺠질일은 없다
