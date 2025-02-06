@@ -42,7 +42,7 @@ public class UserApiController {
         }else {
             User userEntity = userService.회원수정(id, userUpdateDto.toEntity());
             principalDetails.setUser(userEntity); //세션 정보 변경
-            return new CMRespDto<>(1, "회원 수정 완료", userEntity); //ajax 호출한쪽으로 응답함
+            return new CMRespDto<>(1, "회원 수정 완료", userEntity); // 응답시에  userEntity의 모든 getter 함수가 호출되고 Json으로 파싱하여 응답한다 //ajax 호출한쪽으로 응답함
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.photogram.domain.user;
+
 import com.example.photogram.domain.image.Image;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -47,6 +49,7 @@ public class User {
     // 유저프로필(마이페이지) 갈때 유저정보도 가져가면서 이미지를 같이 가져올려면 양방향 매핑을 하면된다.
     // 이렇게 양방향으로 하는이유는 프로필(=마이페이지)에서 User 정보를 통해서 이미지 정보도 가지고 오기 위해서다
     @OneToMany(mappedBy = "user",fetch = FetchType.LAZY) //양방향매핑
+    @JsonIgnoreProperties({"user"})//이거는 쉽게 생각하면 응답할때 무한참조를 방지한다고 생각하면 된다 == 양방향 무한참조 해결방법 //Image 안에 있는 user(getter)를 무시하고 파싱한다 이렇게 하면 org.springframework.http.converter.HttpMessageNotWritableException 이에러를 해결할수 있다
     private List<Image> images; //이미지 여러개  db는 하나의 컬럼에 하나의 데이터만 넣을수 있다 = 그러므로 이부분은 데이터베이스에 만들지 말라고 명시해줘야 한다
 
     private LocalDateTime createDate;
