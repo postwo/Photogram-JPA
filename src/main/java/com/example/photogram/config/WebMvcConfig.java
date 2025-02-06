@@ -18,7 +18,7 @@ public class WebMvcConfig implements WebMvcConfigurer { // web 설정파일
         WebMvcConfigurer.super.addResourceHandlers(registry);
 
         // 이 코드를 재사용할떄는 다른거는 건들필요 없고 addResourceHandler,addResourceLocations 이렇게 두가지만 수정해주면 된다.
-        //file:///C:/workspace/springbootwork/upload/ 이주소처럼 변경 해줌 
+        //file:///C:/workspace/springbootwork/upload/ 이주소처럼 변경 해줌
         registry
                 .addResourceHandler("/upload/**")//jsp 페이지에서 /upload/** 이런 주소패턴이 나오면
                 .addResourceLocations("file:///"+uploadFolder)// 이녀석이 발동한다
