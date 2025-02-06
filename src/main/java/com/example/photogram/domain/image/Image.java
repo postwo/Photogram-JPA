@@ -46,13 +46,14 @@ public class Image {
         this.createDate = LocalDateTime.now();
     }
 
-    @Override
-    public String toString() {
-        return "Image{" +
-                "id=" + id +
-                ", caption='" + caption + '\'' +
-                ", postImageUrl='" + postImageUrl + '\''        //+ ", user=" + user  //여기서 user를 출력 할떄 무한참조가 발생 그러므로 주석 처리하거나 지워버리면 에러발생이 안한다
-                + ", createDate=" + createDate +
-                '}';
-    }
+    // sout 처리할때 테스트 해보기 위해 오버라이딩함 지금은 필요없음 
+//    @Override
+//    public String toString() {
+//        return "Image{" +
+//                "id=" + id +
+//                ", caption='" + caption + '\'' +
+//                ", postImageUrl='" + postImageUrl + '\''        //+ ", user=" + user  //여기서 user를 출력 할떄 무한참조가 발생 그러므로 주석 처리하거나 지워버리면 에러발생이 안한다
+//                + ", createDate=" + createDate +
+//                '}';
+//    }
 }
