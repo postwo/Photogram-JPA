@@ -1,5 +1,6 @@
 package com.example.photogram.service;
 
+import com.example.photogram.domain.subscribe.SubscribeRepository;
 import com.example.photogram.domain.user.User;
 import com.example.photogram.domain.user.UserRepository;
 import com.example.photogram.handler.ex.CustomException;
@@ -15,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final SubscribeRepository subscribeRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true) //읽기전용 = 데이터변경감지를 안한다
@@ -32,6 +34,13 @@ public class UserService {
 //        dto.setPageOwner(pageUserId == principalid ? 1: -1); // 1은 페이지 주인,-1은 주인이 아님 이거는 int여서 삼항연사자사용
         dto.setPageOwnerState(pageUserId == principalid); //boolean 방식
         dto.setImageCount(userEntity.getImages().size()); // 이미지 갯수
+
+        int SubscribeState = subscribeRepository.mSubscribeState(principalid,pageUserId);
+        int SubscribeCount = subscribeRepository.mSubscribeCount(pageUserId);
+
+        dto.setSubscribeState(SubscribeState == 1);
+        dto.setSubscribeCount(SubscribeCount);
+
 
         return dto;
     }
