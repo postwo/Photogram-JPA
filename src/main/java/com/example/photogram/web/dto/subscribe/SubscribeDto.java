@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class SubscribeDto { //구독 모달창
 
-    private int userId; //누군가의 정보 구독할 취소 할 id값
+    private int id; //누군가의 정보 구독할 취소 할 id값
     private String username;
     private String profileImageUrl; //모달창 구독한 유저 사진
     private Integer subscribeState; //구독상태
