@@ -3,19 +3,25 @@ package com.example.photogram.web.api;
 import com.example.photogram.config.auth.PrincipalDetails;
 import com.example.photogram.domain.user.User;
 import com.example.photogram.handler.ex.CustomValidationApiException;
+import com.example.photogram.service.SubscribeService;
 import com.example.photogram.service.UserService;
 import com.example.photogram.web.dto.CMRespDto;
+import com.example.photogram.web.dto.subscribe.SubscribeDto;
 import com.example.photogram.web.dto.user.UserUpdateDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -23,6 +29,15 @@ import java.util.Map;
 public class UserApiController {
 
     private final UserService userService;
+    private final SubscribeService subscribeService;
+
+    @GetMapping("/api/user/{pageUserId}/subscribe") //pageUserId 그페이지주인 아이디
+    public ResponseEntity<?> subscribeList(@PathVariable int pageUserId,@AuthenticationPrincipal PrincipalDetails principalDetails){ //principalDetails로그인한 사용자정보
+
+        List<SubscribeDto> subscribeDto = subscribeService.구독리스트(principalDetails.getUser().getId(),pageUserId) ;
+
+        return new ResponseEntity<>(new CMRespDto<>(1,"구독자 정보 리스트 불러오기 성공",subscribeDto), HttpStatus.OK);
+    }
 
     @PutMapping("/api/user/{id}")
     public CMRespDto<?> update(@PathVariable int id,
