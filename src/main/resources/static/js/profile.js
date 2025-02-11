@@ -72,9 +72,9 @@ function getSubscribeModalItem(u) { //여기는 그림을 그리는곳
 
       if (!u.equalUserState) { // 동일한 유저가 아닐 때 버튼이 만들어져야 합니다
           if (u.subscribeState) { // 구독한 상태
-              item += `<button class="cta blue" onclick="toggleSubscribe(this)">구독취소</button>`;
+              item += `<button class="cta blue" onclick="toggleSubscribe(${u.id},this)">구독취소</button>`;
           } else { // 구독 안 한 상태
-              item += `<button class="cta" onclick="toggleSubscribe(this)">구독하기</button>`;
+              item += `<button class="cta" onclick="toggleSubscribe(${u.id},this)">구독하기</button>`;
           }
       }
 
