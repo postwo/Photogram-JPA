@@ -14,7 +14,7 @@ function storyLoad() {
      dataType:"json"
     }).done(res=>{
     console.log(res);
-        res.data.forEach((image)=>{
+        res.data.content.forEach((image)=>{
             let storyItem = getStoryItem(image); //그림 그려준거
             $("#storyList").append(storyItem); // storyList는 story.jsp 에 있는 태그 아이디다
         });
