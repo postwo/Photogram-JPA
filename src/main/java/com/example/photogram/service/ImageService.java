@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -43,5 +44,11 @@ public class ImageService {
         imageRepository.save(image);
 
 //        System.out.println(imageEntity); //이게 있으면 무한 참조 에러가 발생한다
+    }
+
+    @Transactional(readOnly = true) // 영속성 컨텍스트 변경 가지를 해서 , 더티체킹, flush(반영) =readonly일때는 flush를 적용 안한다
+    public List<Image> 이미지스토리(int principalid) {
+        List<Image> images = imageRepository.mStory(principalid);
+        return images;
     }
 }

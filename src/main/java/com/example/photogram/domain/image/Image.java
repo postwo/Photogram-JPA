@@ -1,6 +1,7 @@
 package com.example.photogram.domain.image;
 
 import com.example.photogram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Image {
        User 엔티티의 id 값을 이 FK로 저장하게 됩니다.
        즉, "userId 컬럼을 만들라"는 것은 JPA에게 "User 엔티티의 PK(id)를 FK로 사용하라"는 의미가 됩니다.
        따라서 User 엔티티의 id 값이 자동으로 저장 */
+    @JsonIgnoreProperties({"images"}) // images는 무시해 == User 테이블에 있는 images 정보는 필요없어서 이렇게 사용
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user; //누가 업로드 했는지 (유저정보) //오브젝트 자체는 db에 저장을 할수 없기 때문에 fk로 저장된다
