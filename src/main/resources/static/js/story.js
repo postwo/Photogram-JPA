@@ -47,7 +47,7 @@ function getStoryItem(image) {
                         <div class="sl__item__contents__icon">
 
                             <button>
-                                <i class="fas fa-heart active" id="storyLikeIcon-1" onclick="toggleLike()"></i>
+                                <i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>
                             </button>
                         </div>
 
@@ -101,8 +101,9 @@ $(window).scroll(() => {
 
 
 // (3) 좋아요, 안좋아요
-function toggleLike() {
-	let likeIcon = $("#storyLikeIcon-1");
+// "" 로 하면 $를 못받아서 `` 으로 변경
+function toggleLike(imageid) {
+	let likeIcon = $(`#storyLikeIcon-${imageid}`);
 	if (likeIcon.hasClass("far")) {
 		likeIcon.addClass("fas");
 		likeIcon.addClass("active");
