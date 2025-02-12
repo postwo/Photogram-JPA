@@ -30,6 +30,7 @@ public class Likes { //likes로 하는 이유는 mariadb나 mysql이 like가 키
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    //이미지에서 like를 참조 likes 에서 이미지 참조 이렇게 되서 무한참된다 그래서 지금 이미지를 가지고 오다가 마는 현상이 발생
     // 1:n : like many이다
     @JoinColumn(name = "imageId") //데이터베이스에 만들어질때 imageid로 생성
     @ManyToOne //manytoone은 기본전략이 eager전략이다 ,onetomany 기본전략은 lazy전략이다
@@ -40,8 +41,10 @@ public class Likes { //likes로 하는 이유는 mariadb나 mysql이 like가 키
     @ManyToOne
     private User user; //누가 좋아요를 했는지
 
+    // 네이티브 쿼리르 사용하면 PrePersist이거는 동작을 안하기 때문에 날짜가 안들어간거다 그러므로 지워도 되고 주석 처리 해도 상관없다
     private LocalDateTime createDate;
 
+    // 네이티브 쿼리르 사용하면 PrePersist이거는 동작을 안하기 때문에 날짜가 안들어간거다 그러므로 지워도 되고 주석 처리 해도 상관없다
     @PrePersist //데이터베이스 인서트되기 직전에 실행 //이거는 jpa save등을 사용할때 적용 네이티브쿼리를 사용하면 적용이 안되다.
     public void createDate() {
         this.createDate = LocalDateTime.now();

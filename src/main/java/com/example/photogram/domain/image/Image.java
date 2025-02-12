@@ -1,5 +1,6 @@
 package com.example.photogram.domain.image;
 
+import com.example.photogram.domain.liks.Likes;
 import com.example.photogram.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -39,7 +41,16 @@ public class Image {
     private User user; //누가 업로드 했는지 (유저정보) //오브젝트 자체는 db에 저장을 할수 없기 때문에 fk로 저장된다
 
     // 생성할거 = 이미지 좋아요
+    //OneToMany 기본전략 lazy 이다 그러므로 likes를 getter 할때 가지고 온다
+    @JsonIgnoreProperties({"image"})//무한참조 발생 해서 추가 ,Image 엔티티에서 List<Likes> likes;를 가져올 때, 각 Likes 객체 내부에 있는 image 필드는 무시
+    @OneToMany(mappedBy = "image") //연관관계의 주인이 아니다 그러므로 컬럼을 만들지 마라 , mappedBy에는 image에 있는 image변수명을 작성 하면된다
+    private List<Likes> likes; // 하나의 이미지에 여러개의 좋아요 , 하나의 좋아요는 하나의 이미지 1(image):n(likes)의 관계
+
     // 생성할거 = 댓글
+
+
+    @Transient //DB에 컬럼이 만들어지지 않는다 이걸 만든이유는 프론트 단에서 like 표시를 변경해주기 위해 사용
+    private boolean likeState;
 
     private LocalDateTime createDate;
 
