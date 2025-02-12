@@ -250,3 +250,44 @@ id   구독하는유저   구독받는유저
 ### yml파일에 open-in-view: true
 open-in-view: true 를 하면 뷰단까지 세션을 오픈한다는 의미 이다 이말은 lazy전략을 사용해도 service에서 controller로 넘어올때 세션이 종료 되지 안하고 controller 지나서 세션이 종료된다
 false로 두고 사용하면 service에서 controller 넘어갈때 세션이 종료되기 떄문에 lazy 전략을 사용못한다 이럴떄는 eager전략을 사용해야한다.
+
+### sout 찍을때 StackOverflowError 이나 무한참조가 발생하면
+dto 나 entity에서 tosring 을 오버라이딩해서 무한참조 되는부부은 지우고 찍으면 된다 .
+
+### shift + tab 은 전체 앞으로 이동
+
+### ajax 
+    $.ajax({
+
+    }).done(res=>{
+
+    }).fail(error=>{
+
+    })
+
+### //manytoone은 기본전략이 eager전략이다 ,onetomany 기본전략은 lazy전략이다 (매우 중요 )
+eager = 도서관에 가서 회원 정보를 조회하면, 해당 회원이 빌린 책 목록도 즉시 같이 불러옵니다.
+lazy = 도서관에서 회원 정보를 조회할 때는 회원 정보만 가져오고, 책 목록은 나중에 필요할 때 가져오도록 설정합니다.
+
+EAGER → 연관된 데이터를 자주 함께 조회할 때
+예: 사용자 프로필 정보 + 게시물 (항상 함께 조회될 경우)
+예: 회원 정보 조회 시, 회원이 빌린 책 목록까지 한 번에 조회
+
+LAZY → 연관된 데이터를 따로 조회하는 경우가 많을 때
+예: 회원 정보는 자주 보지만, 빌린 책 정보는 가끔 필요할 때
+예: 회원 정보는 먼저 조회하고, "내가 빌린 책 보기" 버튼을 클릭하면 그때 책 목록을 조회
+
+
+### yml 에서 create를 했는데 테이블이 안지워지면 연관관계 때문에 그런거다 
+ex) user테이블을 삭제할려면 user랑 연관관계(자식테이블)를 맺고 있는 테이블들이 선 삭제가 되어야 한다
+ex) like 테이블을 예로 들어보면 user,image 테이블을 연관관계를 맺고 있다 user테이블을 참고해서 like 테이블을 만들고 image테이블을 참고해서 like테이블을 생성
+-> like 테이블을 삭제하고 user를 삭제 -> like 테이블을 삭제하고 image를 삭제 
+
+삭제가 안되면 결론적으로 데이터베이스에 들어가서 자식 테이블들을 먼저 삭제하고 그 이후 부모 테이블을 삭제한다 
+ex) 밑 순서대로 자식 테이블 삭제  
+1. drop table like;
+2. drop table subscribe;
+3. drop table images;
+4. drop table user;
+
+### 27강 부터 듣기 
