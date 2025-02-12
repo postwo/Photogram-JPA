@@ -110,17 +110,47 @@ $(window).scroll(() => {
 
 // (3) 좋아요, 안좋아요
 // "" 로 하면 $를 못받아서 `` 으로 변경
-function toggleLike(imageid) {
-	let likeIcon = $(`#storyLikeIcon-${imageid}`);
-	if (likeIcon.hasClass("far")) {
-		likeIcon.addClass("fas");
-		likeIcon.addClass("active");
-		likeIcon.removeClass("far");
-	} else {
-		likeIcon.removeClass("fas");
-		likeIcon.removeClass("active");
-		likeIcon.addClass("far");
+function toggleLike(imageId) {
+
+let likeIcon = $("#storyLikeIcon-" + imageId);
+	if (likeIcon.hasClass("far")) { //좋아요 하겠다
+		$.ajax({
+			type: "POST",
+			url: `/api/image/${imageId}/likes`,
+			dataType: "json"
+		}).done(res => { //$(`#storyLikeCount-${imageId} 해당아이디로 접근해서 그내부에 있는 text를 가지고 온다는 뜻이다
+			let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+			let likeCount = Number(likeCountStr) + 1;  // Number= 문자열을 숫자로 변환
+			$(`#storyLikeCount-${imageId}`).text(likeCount);
+
+			likeIcon.addClass("fas");
+			likeIcon.addClass("active");
+			likeIcon.removeClass("far");
+		}).fail(error => {
+		    console.log("오류",error);
+		});
+
+
+
+	} else { // 좋아요 취소
+		$.ajax({
+			type: "DELETE",
+			url: `/api/image/${imageId}/likes`,
+			dataType: "json"
+		}).done(res => {
+			let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
+			let likeCount = Number(likeCountStr) - 1;
+			$(`#storyLikeCount-${imageId}`).text(likeCount);
+
+			likeIcon.removeClass("fas");
+			likeIcon.removeClass("active");
+			likeIcon.addClass("far");
+		}).fail(error => {
+             console.log("오류",error);
+        });
+
 	}
+
 }
 
 // (4) 댓글쓰기
