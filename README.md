@@ -290,4 +290,11 @@ ex) 밑 순서대로 자식 테이블 삭제
 3. drop table images;
 4. drop table user;
 
+### 양방향 매핑 JsonIgnoreProperties 적용 예
+
+맞습니다! 결론적으로, @JsonIgnoreProperties({"image"}) 어노테이션이
+Likes 엔티티의 image 속성에 적용되었을 때, 양방향 매핑에서도 Image에서 Likes를 조회할 때 Likes 엔티티의 image 필드는 JSON 직렬화에서 제외됩니다.
+하지만 Likes에서 Image를 조회할 때는 image 필드가 포함됩니다. 즉, @JsonIgnoreProperties({"image"})가
+적용된 곳은 Likes 객체가 JSON으로 변환될 때만 영향을 미치고, 데이터베이스 상의 관계나 실제 객체 내에서는 Likes와 Image 간의 참조는 그대로 유지
+
 ### 27강 부터 듣기 
