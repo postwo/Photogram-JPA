@@ -1,5 +1,6 @@
 package com.example.photogram.domain.image;
 
+import com.example.photogram.domain.comment.Comment;
 import com.example.photogram.domain.liks.Likes;
 import com.example.photogram.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -46,7 +47,13 @@ public class Image {
     @OneToMany(mappedBy = "image") //연관관계의 주인이 아니다 그러므로 컬럼을 만들지 마라 , mappedBy에는 image에 있는 image변수명을 작성 하면된다
     private List<Likes> likes; // 하나의 이미지에 여러개의 좋아요 , 하나의 좋아요는 하나의 이미지 1(image):n(likes)의 관계
 
-    // 생성할거 = 댓글
+    //댓글 = f5하면 댓글이 사라지기 때문에 조회해서 가지고 와야한다
+    //양방향 매핑을 하면 부모 엔터티에서도 자식 엔터티를 알 수 있고, 자식 엔터티에서도 부모 엔터티를 참조할 수 있습니다.
+    //OneToMany는 lazy로딩이 된다
+    @OrderBy("id DESC")//이렇게 정렬할수 있다
+    @JsonIgnoreProperties({"image"})//무한참조 발생 해서 추가 ,Image 엔티티에서 List<Likes> likes;를 가져올 때, 각 Likes 객체 내부에 있는 image 필드는 무시
+    @OneToMany(mappedBy = "image") //연관관계의 주인은 comment 안의 있는 image 변수 이다
+    private List<Comment> comments;
 
 
     @Transient //DB에 컬럼이 만들어지지 않는다 이걸 만든이유는 프론트 단에서 like 표시를 변경해주기 위해 사용
