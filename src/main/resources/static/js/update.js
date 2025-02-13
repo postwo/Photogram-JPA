@@ -1,7 +1,7 @@
 // (1) 회원정보 수정
 function update(userId,event) {
      event.preventDefault(); //폼태그 액션을 막기!!
-    let data=$("#profileUpdate").serialize(); //제이쿼리 //이렇게 하면 데이터가 다 담긴다,
+    let data=$("#profileUpdate").serialize(); //제이쿼리 //이렇게 하면 데이터가 다 담긴다, // form 데이터를 전송할때는 serialize 사용하면 된다.
 
     console.log(data);
 
