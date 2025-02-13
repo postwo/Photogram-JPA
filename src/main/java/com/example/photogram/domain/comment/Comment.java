@@ -29,7 +29,7 @@ public class Comment {
     @ManyToOne(fetch = FetchType.EAGER)
     private Image image; //어떤이미지에 작성했는지
 
-    @JsonIgnoreProperties({"images"})
+    @JsonIgnoreProperties({"images"}) // 다른 정보는가지고 와도 images이정보는 필요없기 떄문에 빼고 가지고오기
     @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user; //누가 작성했는지
