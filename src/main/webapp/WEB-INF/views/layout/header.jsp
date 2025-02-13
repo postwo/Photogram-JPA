@@ -33,7 +33,10 @@
 </head>
 
 <body>
-	
+
+	<!-- principal 담아두는 곳-->
+	<input type="hiden" id="principalId" value= "${principal.user.id}"/>
+
 	<header class="header">
 		<div class="container">
 			<a href="/" class="logo">

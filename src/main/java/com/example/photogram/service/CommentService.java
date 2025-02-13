@@ -45,8 +45,13 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment 댓글삭제 () {
-        return null;
+    public void 댓글삭제 (int id) {
+        try{
+            commentRepository.deleteById(id);
+        } catch (Exception e) { //CustomException은 html 파일 반환 해주는 컨트롤러 , CustomApiException 데이터를 리턴해주는 컨트롤러, validation은 처음 값을 받을떄 그럴때 사용
+            throw new CustomApiException(e.getMessage());
+        }
+
     }
 
 
