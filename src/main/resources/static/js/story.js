@@ -174,6 +174,8 @@ function addComment(imageId) {
 		content: commentInput.val()
 	}
 
+// 이부분을 주석처리하면 valdation 테스트를 할 수 있다
+// 프론트단에서 막아주기 때문에 서버에서 에러가 뜰경우는 거의 없다
 	if (data.content === "") {
 		alert("댓글을 작성해주세요!");
 		return;
@@ -196,13 +198,14 @@ function addComment(imageId) {
               <b>${comment.user.username} :</b>
               ${comment.content}
             </p>
-            <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button> // 내가 바로 적은글이어서 비교 할필요 없이 바로 삭제 버튼 생성 되면 된다 
+            <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button> // 내가 바로 적은글이어서 비교 할필요 없이 바로 삭제 버튼 생성 되면 된다
           </div>
         `;
         commentList.prepend(content);
 
     }).fail(error => {
-        console.log("오류",error);
+        console.log("오류",error.responseJSON.data.content);
+        alert(error.responseJSON.data.content); //포스트맨으로 뚫거나 할때 발생
     })
 
 
