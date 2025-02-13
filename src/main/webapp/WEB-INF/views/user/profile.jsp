@@ -86,8 +86,8 @@
                          <img src="/upload/${image.postImageUrl}" /> <%--이렇게 앞에다 /upload 이걸 붙여주면 WebMvcConfig 가 동작을해서 C:/workspace/springbootwork/upload/ 이런형식으로 주소를 만들어준다 --%>
                      </a>
                      <div class="comment">
-                         <a href="#" class="">
-                             <i class="fas fa-heart"></i><span>0</span>
+                         <a href="#" class=""> <%-- image.likes.size() 이방식은 추천안한다 서버에서 다 만들어서 보내는게 최고--%>
+                             <i class="fas fa-heart"></i><span>${image.likeCount}</span> <%--image.likeCount는 db에 없는거기 때문에 못가지고 온다  --%>
                          </a>
                      </div>
                  </div>

@@ -41,6 +41,11 @@ public class UserService {
         dto.setSubscribeState(SubscribeState == 1);
         dto.setSubscribeCount(SubscribeCount);
 
+        // 마이페이지 이미지에 좋아요 카운트 추가하기
+        // 각각의 이미지마다 들고 있어야 하기 때문에 dto에 따로 넣을 수도없고 해서 dto안에 User에 userentity 내부를 수정해주면 된다
+        userEntity.getImages().forEach((image)->{
+            image.setLikeCount(image.getLikes().size());
+        });
 
         return dto;
     }
