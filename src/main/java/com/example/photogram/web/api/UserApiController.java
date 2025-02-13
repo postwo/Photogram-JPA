@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -30,6 +31,16 @@ public class UserApiController {
 
     private final UserService userService;
     private final SubscribeService subscribeService;
+
+    // MultipartFile  profileImageFile 이거하고 profile.jsp 에 name명하고 정확히 같아야 매핑 돼서 받아온다(중요)
+    @PutMapping("/api/user/{principalId}/profileImageUrl")
+    public ResponseEntity<?> profileImageUrlUpdate(@PathVariable int principalId, MultipartFile profileImageFile,
+                                                   @AuthenticationPrincipal PrincipalDetails principalDetails){ //principalDetails 회원이미지가 변경 되는거기 때무에 추가
+        User userEntity = userService.회원프로필사진변경(principalId,profileImageFile);
+        principalDetails.setUser(userEntity); //세션 변경
+        return new ResponseEntity<>(new CMRespDto<>(1,"프로필사진 변경 성공",null),HttpStatus.OK);
+    }
+
 
     @GetMapping("/api/user/{pageUserId}/subscribe") //pageUserId 그페이지주인 아이디
     public ResponseEntity<?> subscribeList(@PathVariable int pageUserId,@AuthenticationPrincipal PrincipalDetails principalDetails){ //principalDetails로그인한 사용자정보
