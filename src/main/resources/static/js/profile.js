@@ -87,7 +87,16 @@ function getSubscribeModalItem(u) { //여기는 그림을 그리는곳
 
 
 // (3) 유저 프로파일 사진 변경 (완)
-function profileImageUpload() {
+function profileImageUpload(pageUserId, principalId) {
+
+//    console.log("pageUserId",pageUserId);
+//    console.log("principalId",principalId);
+
+    if(pageUserId != principalId){
+        alert("프로필 사진을 수정할 수 없는 유저입니다");
+        return; //이렇게 return을 걸면 밑의껄 실행을 안한다
+    }
+
 	$("#userProfileImageInput").click();
 
 	$("#userProfileImageInput").on("change", (e) => {
@@ -98,12 +107,33 @@ function profileImageUpload() {
 			return;
 		}
 
-		// 사진 전송 성공시 이미지 변경
-		let reader = new FileReader();
-		reader.onload = (e) => {
-			$("#userProfileImage").attr("src", e.target.result);
-		}
-		reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+		// 서버에 이미지를 전송
+        let profileImageForm = $("#userProfileImageForm")[0]; // 배열로 리턴해주가 때문에 [0] 이거를 붙여준거다
+        console.log(profileImageForm);
+
+        //formdata 객체를 이용하면 form 태그의 필드와 그 값을 나타내는 일련의 key/value 쌍을 담을 수 있다
+        let formData = new FormData(profileImageForm); //이거는 사진을 전송 하는거여서 이렇게 꼭 사용한다
+
+        $.ajax({
+            type:"put",
+            url:`/api/user/${principalId}/profileImageUrl`,
+            data:formData,
+            contentType: false, // 필수: x-www-form-urlencoded로 파싱되는것을 방지, x-www-formdata 이걸쓰면 사진을 전송 못하기 때문에 false 로 설정
+            processData: false, // 필수: contentType을 false로 줬을 때 QueryString 자동 설정됨. 해제
+            enctype:"multipart/form-data",
+            dataType:"json"
+        }).done(res => {
+            // 사진 전송 성공시 이미지 변경
+            let reader = new FileReader();
+            reader.onload = (e) => {
+                $("#userProfileImage").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f); // 이 코드 실행시 reader.onload 실행됨.
+        }).fail(error => {
+            console.log("오류",error);
+        })
+
+
 	});
 }
 
