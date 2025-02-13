@@ -2,6 +2,7 @@ package com.example.photogram.domain.liks;
 
 import com.example.photogram.domain.image.Image;
 import com.example.photogram.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -36,7 +37,7 @@ public class Likes { //likes로 하는 이유는 mariadb나 mysql이 like가 키
     @ManyToOne //manytoone은 기본전략이 eager전략이다 ,onetomany 기본전략은 lazy전략이다
     private Image image; //좋아요할 이미지 //하나의 이미지는 좋아요를 여러개 , 하나의 좋아요를 여러가지 이미지에 할수 있다는 말이 안된다 -> 하나의 좋아요는 하나의 이미지
 
-    //오류가 터지고 나서 잡아봅시다
+    @JsonIgnoreProperties({"images"}) // likes 안의 images만 안나오면 이미지가 안나오는걸 해결할수 있다
     @JoinColumn(name = "userId") //데이터베이스에 만들어질때 userId로 생성
     @ManyToOne
     private User user; //누가 좋아요를 했는지
