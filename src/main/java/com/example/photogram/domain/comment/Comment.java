@@ -23,7 +23,7 @@ public class Comment {
     private int id;
 
     @Column(length = 100, nullable = false)
-    private String content;
+    private String content; //내용
 
     @JoinColumn(name = "imageId")
     @ManyToOne(fetch = FetchType.EAGER)
