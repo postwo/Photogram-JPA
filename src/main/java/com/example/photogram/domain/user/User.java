@@ -58,4 +58,23 @@ public class User {
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
+
+    @Override
+    public String toString() { //sout 을 하기위해 images 만 삭제
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", website='" + website + '\'' +
+                ", bio='" + bio + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", gender='" + gender + '\'' +
+                ", profileImageUrl='" + profileImageUrl + '\'' +
+                ", role='" + role + '\'' +
+                ", createDate=" + createDate +
+                '}';
+    }
 }
