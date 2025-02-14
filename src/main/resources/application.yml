@@ -36,16 +36,6 @@ spring:
       name: test
       password: 1234
 
-  oauth2:
-    client:
-      registration:
-        facebook: #facebook 말고도 naveer,kakao 이렇게 변경하면 된다
-          client-id: ${clientId} #client-id: 다음에 무조건 한칸 띄고 작성한다 = 앱id 넣기
-          client-secret: ${clientpw} # 앱 시크릿 코드
-          scope:
-            - public_profile
-            - email
-
 
 file:
   path: C:/workspace/springbootwork/upload/
