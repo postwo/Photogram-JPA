@@ -419,7 +419,7 @@ principal == principalDetails이다
 principal.user.username 그러므로 호출할려면 이렇게 user에 있는 정보를 가져오듯이 이렇게 가지고 와야 한다.
 
 ### 포토그램 github
-https://github.com/codingspecialist/EaszUp-Springboot-Photogram-End
+https://github.com/codingspecialist/Eazyup-Photogram-Deploy
 
 ### 영속화 뜻
 영속화 = 데이터를 DB에 저장하고 관리하는 것
@@ -569,4 +569,26 @@ Likes 엔티티의 image 속성에 적용되었을 때, 양방향 매핑에서�
 
 ### http://localhost:8080/upload/null 404 (Not Found) 이게 뜨는 이유는 프로필 이미지가 없어서 뜨는거다 그러므로 프로필 이미지를 넣어주면 해결 
 
-### 32강 부터 듣기 
+### ✔ 단방향 매핑 (Comment → Image)
+
+Comment에서 Image를 참조할 수 있지만, Image에서는 Comment 목록을 모름.
+부모(예: Image)에서 자식을 조회할 일이 없으면 단방향이 좋음.
+✔ 양방향 매핑 (Comment ↔ Image)
+
+Comment에서도 Image를 참조하고, Image에서도 Comment 목록을 알 수 있음.
+부모(예: Image)에서 자식을 자주 조회해야 하면 양방향이 좋음.
+즉, 양방향 매핑을 하면 부모도 자식을 알 수 있고, 단방향이면 자식만 부모를 알 수 있습니다
+
+### 1:N 관계에서 부모-자식 개념
+📌 부모(1) → 독립적으로 존재할 수 있는 엔터티
+📌 자식(N) → 부모 없이는 의미가 없는 엔터티
+
+예제: Image(1) ↔ Comment(N)
+
+하나의 Image에는 여러 개의 Comment가 달릴 수 있음 (1:N 관계)
+Comment는 반드시 Image를 참조해야 하지만, Image는 Comment 없이도 존재 가능
+따라서 Image가 부모, Comment가 자식
+
+### CustomException은 html 파일 반환 해주는 컨트롤러 , CustomApiException 데이터를 리턴해주는 컨트롤러, validation은 처음 값을 받을떄 그럴때 사용
+
+### AOP (핵심 비즈니스 로직과 공통적인 부가 기능을 분리하여 관리하는 프로그래밍 기법)
