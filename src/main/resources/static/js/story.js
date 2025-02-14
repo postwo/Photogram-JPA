@@ -198,7 +198,7 @@ function addComment(imageId) {
               <b>${comment.user.username} :</b>
               ${comment.content}
             </p>
-            <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button> // 내가 바로 적은글이어서 비교 할필요 없이 바로 삭제 버튼 생성 되면 된다
+            <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>
           </div>
         `;
         commentList.prepend(content);
